@@ -1,0 +1,30 @@
+.footer {
+  width: 100%;
+  background: #0067a3;
+  margin-top: 32px;
+}
+
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1235px;
+  margin: 0 auto;
+}
+
+.footer-p__task-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-info__p {
+  display: block;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  &:first-of-type {
+    margin-right: 36px;
+  }
+}

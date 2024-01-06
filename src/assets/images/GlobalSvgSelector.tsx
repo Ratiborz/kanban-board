@@ -6,7 +6,7 @@ export const GlobalSvgSelector = ({ id }: Props) => {
   switch (id) {
     case 'account-logo':
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="#fff">
           <g clipPath="url(#clip0_2_4)">
             <path
               d="M20 39.2C30.6039 39.2 39.2 30.6039 39.2 20C39.2 9.39612 30.6039 0.799988 20 0.799988C9.39612 0.799988 0.799988 9.39612 0.799988 20C0.799988 30.6039 9.39612 39.2 20 39.2Z"
@@ -29,7 +29,7 @@ export const GlobalSvgSelector = ({ id }: Props) => {
       );
     case 'arrow-down':
       return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#fff">
           <g clipPath="url(#clip0_2_9)">
             <path
               d="M7.415 8.20999L12 12.795L16.585 8.20999L18 9.62499L12 15.625L6 9.62499L7.415 8.20999Z"
@@ -43,5 +43,8 @@ export const GlobalSvgSelector = ({ id }: Props) => {
           </defs>
         </svg>
       );
+    default:
+      return <svg></svg>;
+      break;
   }
 };

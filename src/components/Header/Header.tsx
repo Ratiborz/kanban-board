@@ -6,11 +6,13 @@ type Props = {};
 const Header = (props: Props): JSX.Element => {
   return (
     <header className="header">
-      <h1>Awesome Kanban Board</h1>
+      <div className="header-container">
+        <h1 className="header-h1__name">Awesome Kanban Board</h1>
 
-      <div className="header-account-icons">
-        <GlobalSvgSelector id="account-logo" />
-        <GlobalSvgSelector id="arrow-down" />
+        <div className="header-account-icons">
+          <GlobalSvgSelector id="account-logo" />
+          <GlobalSvgSelector id="arrow-down" />
+        </div>
       </div>
     </header>
   );

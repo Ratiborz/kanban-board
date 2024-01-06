@@ -1,0 +1,51 @@
+.card {
+  max-width: 282px;
+  width: 100%;
+  border-radius: 10px;
+  background: #ebecf0;
+  padding: 12px 12px 8px 12px;
+}
+
+.card-h3__name {
+  color: #000;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.task {
+  color: #000;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 5px;
+  background: #fff;
+  padding: 7px 9px 7px 8px;
+  margin-bottom: 15px;
+  &:last-of-type {
+    margin-bottom: 17px;
+  }
+}
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: #ebecf0;
+  cursor: pointer;
+  &:hover {
+    color: #211ec2;
+    fill: #211ec2;
+    transition: 0.3s;
+  }
+  &:active {
+    color: red;
+    transition: 0.1s;
+  }
+  svg {
+    margin-bottom: 2px;
+    margin-right: 3px;
+  }
+}

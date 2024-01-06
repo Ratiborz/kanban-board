@@ -3,6 +3,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background: #0079bf;
 }
 
 *,
@@ -12,6 +13,10 @@ body {
 }
 
 .container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
   max-width: 1235px;
   margin: 0 auto;
 }
