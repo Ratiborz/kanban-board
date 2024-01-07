@@ -1,0 +1,104 @@
+.card {
+  max-width: 282px;
+  width: 100%;
+  border-radius: 10px;
+  background: #ebecf0;
+  padding: 12px 12px 8px 12px;
+  margin-bottom: 50px;
+}
+
+.card-h3__name {
+  color: #000;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.task {
+  color: #000;
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 5px;
+  background: #fff;
+  padding: 7px 9px 7px 8px;
+  margin-bottom: 15px;
+  &:last-of-type {
+    margin-bottom: 0px;
+  }
+}
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 17px;
+  padding: 4px 5px;
+  transition: 0.3s;
+  &:hover {
+    background-color: #0079bf;
+    color: #fff;
+    transition: 0.3s;
+  }
+  &:active {
+    background-color: rgb(255, 61, 61);
+    transition: 0.1s;
+  }
+  svg {
+    margin-bottom: 2px;
+    margin-right: 3px;
+    transition: 0.3s;
+  }
+}
+
+.card-btn svg {
+  fill: #5e6c84; /* Устанавливаем начальный цвет */
+  transition: fill 0.2s; /* Добавляем плавный переход */
+}
+
+.card-btn:hover svg {
+  fill: #fff; /* Устанавливаем цвет для наведения курсора */
+}
+
+.card-tasks {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.addTask {
+  margin-top: 15px;
+  input {
+    outline: none;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid black;
+  }
+}
+
+.card-tasks::-webkit-scrollbar {
+  width: 12px; /* Ширина полосы прокрутки для веб-кит браузеров */
+}
+
+.card-tasks::-webkit-scrollbar-thumb {
+  background-color: #cbcbcb; /* Цвет ползунка для веб-кит браузеров */
+  border-radius: 5px;
+  height: 30px;
+}
+
+.card-tasks::-webkit-scrollbar-track {
+  background-color: #fff; /* Цвет фона полосы прокрутки для веб-кит браузеров */
+  border-radius: 5px;
+}
+
+.card-tasks::-ms-autohiding-scrollbar {
+  width: 5px; /* Ширина полосы прокрутки для Internet Explorer */
+}
+
+.card-tasks::-ms-scrollbar-thumb {
+  background-color: #ccc; /* Цвет ползунка для Internet Explorer */
+}
