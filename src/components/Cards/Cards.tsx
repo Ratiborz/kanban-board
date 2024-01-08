@@ -2,20 +2,7 @@ import { useEffect, useState } from 'react';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 import './Cards.module.scss';
 
-type Props = {};
-
-interface Card {
-  title: string;
-  tasks: Task[];
-}
-
-interface Task {
-  id: number;
-  name: string;
-  description: string;
-}
-
-const Cards = (props: Props) => {
+const Cards = () => {
   const [newTask, setNewTask] = useState(10);
   const [newTaskName, setNewTaskName] = useState('');
   const [handleNewTask, setHandleNewTask] = useState(false);
@@ -69,21 +56,6 @@ const Cards = (props: Props) => {
           name: 'Shop bug4',
           description: 'Fix all the bugs',
         },
-        {
-          id: 6,
-          name: 'Shop bug5',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 7,
-          name: 'Shop bug6',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 8,
-          name: 'Shop page – performance issues',
-          description: 'Fix all the bugs',
-        },
       ],
     },
     {
@@ -122,6 +94,12 @@ const Cards = (props: Props) => {
     setNewTask(index);
   };
 
+  const handleEnterKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setHandleNewTask(true);
+    }
+  };
+
   const handleNewTaskInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTaskName(e.target.value);
   };
@@ -136,7 +114,6 @@ const Cards = (props: Props) => {
       const updatedCards = [...cards]; // создание копии объекта cards
       updatedCards[0].tasks.push(taskObj); // обновление массива tasks в копии
       setCards(updatedCards); // обновление состояния cards
-      console.log(cards);
 
       // Скрыть поле ввода после добавления задачи
       setNewTask(10);
@@ -159,7 +136,20 @@ const Cards = (props: Props) => {
           </div>
           {newTask === cardIndex && cardIndex === 0 ? (
             <div className="task addTask">
-              <input className="task" type="text" value={newTaskName} onChange={handleNewTaskInputChange} />
+              <input
+                className="task"
+                type="text"
+                onKeyDown={handleEnterKeyPress}
+                value={newTaskName}
+                onChange={handleNewTaskInputChange}
+              />
+            </div>
+          ) : (
+            ''
+          )}
+          {newTask === cardIndex && cardIndex === 1 ? (
+            <div className="task addTask">
+              <select className="select" value={''} />
             </div>
           ) : (
             ''

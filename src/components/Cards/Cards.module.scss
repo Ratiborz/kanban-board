@@ -65,6 +65,16 @@
   fill: #fff; /* Устанавливаем цвет для наведения курсора */
 }
 
+.card-btn:disabled {
+  cursor: default;
+}
+
+.card-btn:disabled:hover,
+.card-btn:disabled:active {
+  background: #fff;
+  color: #c8c8c8;
+}
+
 .card-tasks {
   max-height: 350px;
   overflow-y: auto;
@@ -78,6 +88,10 @@
     border: none;
     border-bottom: 1px solid black;
   }
+}
+
+.select {
+  width: 100%;
 }
 
 .card-tasks::-webkit-scrollbar {
