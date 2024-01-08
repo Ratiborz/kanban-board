@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
-import Card from './Card/Card';
 import './Cards.module.scss';
 
 type Props = {};
@@ -21,7 +20,7 @@ const Cards = (props: Props) => {
   const [newTaskName, setNewTaskName] = useState('');
   const [handleNewTask, setHandleNewTask] = useState(false);
 
-  const cards: Card[] = [
+  const [cards, setCards] = useState([
     {
       title: 'Backlog',
       tasks: [
@@ -117,7 +116,7 @@ const Cards = (props: Props) => {
         },
       ],
     },
-  ];
+  ]);
 
   const addTask = (index: number) => {
     setNewTask(index);
@@ -130,13 +129,14 @@ const Cards = (props: Props) => {
   useEffect(() => {
     if (handleNewTask) {
       const taskObj = {
-        id: cards[0].tasks.length + 1,
+        id: cards[0].tasks.length,
         name: newTaskName,
         description: '',
       };
-      cards[0].tasks.push(taskObj);
-      console.log(taskObj);
-      console.log(cards[0].tasks);
+      const updatedCards = [...cards]; // создание копии объекта cards
+      updatedCards[0].tasks.push(taskObj); // обновление массива tasks в копии
+      setCards(updatedCards); // обновление состояния cards
+      console.log(cards);
 
       // Скрыть поле ввода после добавления задачи
       setNewTask(10);
@@ -166,7 +166,10 @@ const Cards = (props: Props) => {
           )}
 
           {newTask === cardIndex && cardIndex === 0 ? (
-            <button className="card-btn addTask-btn" onClick={() => setHandleNewTask(!handleNewTask)}>
+            <button
+              className="card-btn addTask-btn"
+              disabled={!newTaskName.trim()}
+              onClick={() => setHandleNewTask(!handleNewTask)}>
               Submit
             </button>
           ) : (
