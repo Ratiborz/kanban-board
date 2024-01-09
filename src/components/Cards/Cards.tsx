@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 import './Cards.module.scss';
+import Ready from './Ready/Ready';
+import Backlog from './Backlog/Backlog';
 
 const Cards = () => {
   const [newTask, setNewTask] = useState(10);
@@ -104,6 +106,16 @@ const Cards = () => {
     setNewTaskName(e.target.value);
   };
 
+  const handleTaskMove = (taskId: number) => {
+    const updatedCards = cards.map((card) => {
+      return {
+        ...card,
+        tasks: card.tasks.filter((task) => task.id !== taskId),
+      };
+    });
+    setCards(updatedCards);
+  };
+
   useEffect(() => {
     if (handleNewTask) {
       const taskObj = {
@@ -135,25 +147,12 @@ const Cards = () => {
             ))}
           </div>
           {newTask === cardIndex && cardIndex === 0 ? (
-            <div className="task addTask">
-              <input
-                className="task"
-                type="text"
-                onKeyDown={handleEnterKeyPress}
-                value={newTaskName}
-                onChange={handleNewTaskInputChange}
-              />
-            </div>
+            <Backlog onKeyDown={handleEnterKeyPress} value={newTaskName} onChange={handleNewTaskInputChange} />
           ) : (
             ''
           )}
-          {newTask === cardIndex && cardIndex === 1 ? (
-            <div className="task addTask">
-              <select className="select" value={''} />
-            </div>
-          ) : (
-            ''
-          )}
+
+          {newTask === cardIndex && cardIndex === 1 ? <Ready onTaskMove={handleTaskMove} cards={cards} /> : ''}
 
           {newTask === cardIndex && cardIndex === 0 ? (
             <button
