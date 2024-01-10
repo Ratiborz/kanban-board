@@ -1,36 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { CardsContext, CardsContextType } from '../../context/CardsData';
 
-interface Card {
-  title: string;
-  tasks: { id: number; name: string; description: string }[];
-}
+const Ready: React.FC<{ onTaskMove: (taskId: number) => void }> = ({ onTaskMove }) => {
+  const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
-interface Props {
-  cards: Card[];
-}
-
-const Ready: React.FC<Props & { onTaskMove: (taskId: number) => void }> = ({ cards, onTaskMove }) => {
   const handleTaskMove = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTask = e.target.value;
-    console.log(selectedTask);
 
-    // Найдем задачу в Backlog
+    // Поиск задачи в Backlog
     const backlogTask = cards[0].tasks.find((task) => task.name === selectedTask);
 
     if (backlogTask) {
-      const updatedBacklogTasks = cards[0].tasks.filter((task) => task.name !== selectedTask);
-      const updatedCards = [{ ...cards[0], tasks: updatedBacklogTasks }, ...cards.slice(1)];
+      const taskObj = {
+        id: cards[0].tasks.length,
+        name: selectedTask,
+        description: '',
+      };
 
-      const readyTasks = [...cards[1].tasks, backlogTask];
+      const updatedCards = [...cards]; // создание копии объекта cards
+      updatedCards[1].tasks.push(taskObj); // обновление массива tasks в копии
+      setCards(updatedCards);
 
-      onTaskMove(backlogTask.id);
+      onTaskMove(backlogTask.id); // Вызов функции обработки перемещения задачи
     }
   };
 
   return (
     <div className="task addTask">
       <select className="select" onChange={handleTaskMove}>
-        {cards[0].tasks.map((task, index) => (
+        {cards[0].tasks.map((task, index: number) => (
           <option key={index} value={task.name}>
             {task.name}
           </option>

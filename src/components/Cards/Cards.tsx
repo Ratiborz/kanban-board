@@ -1,96 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 import './Cards.module.scss';
 import Ready from './Ready/Ready';
 import Backlog from './Backlog/Backlog';
+import { Card, CardsContext, CardsContextType } from '../context/CardsData';
 
 const Cards = () => {
   const [newTask, setNewTask] = useState(10);
   const [newTaskName, setNewTaskName] = useState('');
   const [handleNewTask, setHandleNewTask] = useState(false);
 
-  const [cards, setCards] = useState([
-    {
-      title: 'Backlog',
-      tasks: [
-        {
-          id: 0,
-          name: 'Login page – performance issues',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 1,
-          name: 'Sprint bugfix',
-          description: 'Fix all the bugs',
-        },
-      ],
-    },
-    {
-      title: 'Ready',
-      tasks: [
-        {
-          id: 0,
-          name: 'Shop page – performance issues',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 1,
-          name: 'Checkout bugfix',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 2,
-          name: 'Shop bug1',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 3,
-          name: 'Shop bug2',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 4,
-          name: 'Shop bug3',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 5,
-          name: 'Shop bug4',
-          description: 'Fix all the bugs',
-        },
-      ],
-    },
-    {
-      title: 'In Progress',
-      tasks: [
-        {
-          id: 0,
-          name: 'User page – performance issues',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 1,
-          name: 'Auth bugfix',
-          description: 'Fix all the bugs',
-        },
-      ],
-    },
-    {
-      title: 'Finished',
-      tasks: [
-        {
-          id: 0,
-          name: 'Main page – performance issues',
-          description: 'Fix all the bugs',
-        },
-        {
-          id: 1,
-          name: 'Main page bugfix',
-          description: 'Fix all the bugs',
-        },
-      ],
-    },
-  ]);
+  const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
   const addTask = (index: number) => {
     setNewTask(index);
@@ -107,12 +27,16 @@ const Cards = () => {
   };
 
   const handleTaskMove = (taskId: number) => {
-    const updatedCards = cards.map((card) => {
-      return {
-        ...card,
-        tasks: card.tasks.filter((task) => task.id !== taskId),
-      };
+    const updatedCards = cards.map((card: Card, index: number) => {
+      if (index === 0) {
+        return {
+          ...card,
+          tasks: card.tasks.filter((task) => task.id !== taskId),
+        };
+      }
+      return card;
     });
+
     setCards(updatedCards);
   };
 
@@ -136,11 +60,11 @@ const Cards = () => {
 
   return (
     <>
-      {cards.map((card, cardIndex) => (
+      {cards.map((card: Card, cardIndex: number) => (
         <div key={cardIndex} className="card">
           <h3 className="card-h3__name">{card.title}</h3>
           <div className="card-tasks">
-            {card.tasks.map((task, index) => (
+            {card.tasks.map((task, index: number) => (
               <div key={index} className="task">
                 {task.name}
               </div>
@@ -152,7 +76,7 @@ const Cards = () => {
             ''
           )}
 
-          {newTask === cardIndex && cardIndex === 1 ? <Ready onTaskMove={handleTaskMove} cards={cards} /> : ''}
+          {newTask === cardIndex && cardIndex === 1 ? <Ready onTaskMove={handleTaskMove} /> : ''}
 
           {newTask === cardIndex && cardIndex === 0 ? (
             <button
