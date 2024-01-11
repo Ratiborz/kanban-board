@@ -1,10 +1,14 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   background: #0079bf;
-  height: 100%;
 }
 
 *,
@@ -13,17 +17,19 @@ body {
   box-sizing: border-box;
 }
 
-.container {
+.main-container {
   display: flex;
   align-items: flex-start;
-  gap: 24px;
+  justify-content: space-between;
   flex-wrap: wrap;
   max-width: 1235px;
   margin: 0 auto;
-  flex: 1;
+  height: 100%;
+  width: 100%;
+  flex-grow: 1;
 }
 
-#root {
+.wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

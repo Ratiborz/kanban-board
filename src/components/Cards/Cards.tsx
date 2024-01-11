@@ -88,6 +88,7 @@ const Cards = () => {
           ) : (
             <button
               className="card-btn"
+              disabled={cardIndex === 1 && cards[0].tasks.length === 0 ? true : false}
               onClick={() => {
                 addTask(cardIndex);
               }}>

@@ -25,6 +25,7 @@
   background: #fff;
   padding: 7px 9px 7px 8px;
   margin-bottom: 15px;
+  word-wrap: break-word;
   &:last-of-type {
     margin-bottom: 0px;
   }
@@ -67,12 +68,18 @@
 
 .card-btn:disabled {
   cursor: default;
+  svg {
+    fill: #c8c8c8;
+  }
 }
 
 .card-btn:disabled:hover,
 .card-btn:disabled:active {
   background: #fff;
   color: #c8c8c8;
+  svg {
+    fill: #c8c8c8;
+  }
 }
 
 .card-tasks {
@@ -91,7 +98,14 @@
 }
 
 .select {
-  width: 100%;
+  max-width: 260px;
+  outline: none;
+  border-radius: 0.5em;
+}
+
+.select-option {
+  width: 258px;
+  word-wrap: break-word;
 }
 
 .card-tasks::-webkit-scrollbar {

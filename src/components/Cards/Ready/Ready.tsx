@@ -1,39 +1,45 @@
 import React, { useContext } from 'react';
+import Select from 'react-select';
 import { CardsContext, CardsContextType } from '../../context/CardsData';
+
+type MyOptionType = {
+  value: string;
+  label: string;
+};
 
 const Ready: React.FC<{ onTaskMove: (taskId: number) => void }> = ({ onTaskMove }) => {
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
-  const handleTaskMove = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedTask = e.target.value;
+  const handleTaskMove = (selectedOptions: readonly MyOptionType[]) => {
+    if (selectedOptions) {
+      selectedOptions.forEach((selectedOption) => {
+        const selectedTask = selectedOption.value;
+        const backlogTask = cards[0].tasks.find((task) => task.name === selectedTask);
 
-    // Поиск задачи в Backlog
-    const backlogTask = cards[0].tasks.find((task) => task.name === selectedTask);
+        if (backlogTask) {
+          const taskObj = {
+            id: cards[0].tasks.length,
+            name: selectedTask,
+            description: '',
+          };
 
-    if (backlogTask) {
-      const taskObj = {
-        id: cards[0].tasks.length,
-        name: selectedTask,
-        description: '',
-      };
-
-      const updatedCards = [...cards]; // создание копии объекта cards
-      updatedCards[1].tasks.push(taskObj); // обновление массива tasks в копии
-      setCards(updatedCards);
-
-      onTaskMove(backlogTask.id); // Вызов функции обработки перемещения задачи
+          const updatedCards = [...cards];
+          updatedCards[1].tasks.push(taskObj);
+          setCards(updatedCards);
+          onTaskMove(backlogTask.id);
+        }
+      });
     }
   };
 
+  const options: MyOptionType[] = cards[0].tasks.map((task) => ({
+    value: task.name,
+    label: task.name,
+  }));
+
   return (
     <div className="task addTask">
-      <select className="select" onChange={handleTaskMove}>
-        {cards[0].tasks.map((task, index: number) => (
-          <option key={index} value={task.name}>
-            {task.name}
-          </option>
-        ))}
-      </select>
+      <Select className="select" isMulti onChange={handleTaskMove} options={options} />
     </div>
   );
 };

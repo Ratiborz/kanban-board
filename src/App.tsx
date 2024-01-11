@@ -7,11 +7,13 @@ function App() {
   return (
     <>
       <CardsDataProvider>
-        <Header />
-        <div className="container">
-          <Cards />
+        <div className="wrapper">
+          <Header />
+          <main className="main-container">
+            <Cards />
+          </main>
+          <Footer />
         </div>
-        <Footer />
       </CardsDataProvider>
     </>
   );
