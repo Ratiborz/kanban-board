@@ -1,38 +1,43 @@
 import React, { useContext } from 'react';
 import Select from 'react-select';
-import { CardsContext, CardsContextType } from '../../context/CardsData';
+import { Card, CardsContext, CardsContextType } from '../../../context/CardsData';
 
 type MyOptionType = {
   value: string;
   label: string;
 };
 
-const Ready: React.FC<{ onTaskMove: (taskId: number) => void }> = ({ onTaskMove }) => {
+const Ready: React.FC<{ cardIndex: number }> = ({ cardIndex }) => {
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
+
+  const actualArray = cardIndex === 0 ? 0 : cardIndex - 1;
 
   const handleTaskMove = (selectedOptions: readonly MyOptionType[]) => {
     if (selectedOptions) {
+      const updatedCards = [...cards]; // Создать копию массива cards
       selectedOptions.forEach((selectedOption) => {
         const selectedTask = selectedOption.value;
-        const backlogTask = cards[0].tasks.find((task) => task.name === selectedTask);
+        const backlogTask = updatedCards[actualArray].tasks.find((task) => task.name === selectedTask);
 
         if (backlogTask) {
           const taskObj = {
-            id: cards[0].tasks.length,
+            id: updatedCards[actualArray].tasks.length,
             name: selectedTask,
-            description: '',
+            description: 'This task has no description',
           };
 
-          const updatedCards = [...cards];
-          updatedCards[1].tasks.push(taskObj);
-          setCards(updatedCards);
-          onTaskMove(backlogTask.id);
+          updatedCards[cardIndex].tasks.push(taskObj); // Добавить новую задачу в карточку
+
+          updatedCards[actualArray].tasks = updatedCards[actualArray].tasks.filter(
+            (task) => task.id !== backlogTask.id
+          ); // Удалить задачу из предыдущей карточки
         }
       });
+      setCards(updatedCards); // Обновить состояние карточек
     }
   };
 
-  const options: MyOptionType[] = cards[0].tasks.map((task) => ({
+  const options: MyOptionType[] = cards[actualArray].tasks.map((task) => ({
     value: task.name,
     label: task.name,
   }));

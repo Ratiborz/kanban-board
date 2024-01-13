@@ -3,7 +3,7 @@ import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 import './Cards.module.scss';
 import Ready from './Ready/Ready';
 import Backlog from './Backlog/Backlog';
-import { Card, CardsContext, CardsContextType } from '../context/CardsData';
+import { Card, CardsContext, CardsContextType } from '../../context/CardsData';
 
 const Cards = () => {
   const [newTask, setNewTask] = useState(10);
@@ -26,26 +26,12 @@ const Cards = () => {
     setNewTaskName(e.target.value);
   };
 
-  const handleTaskMove = (taskId: number) => {
-    const updatedCards = cards.map((card: Card, index: number) => {
-      if (index === 0) {
-        return {
-          ...card,
-          tasks: card.tasks.filter((task) => task.id !== taskId),
-        };
-      }
-      return card;
-    });
-
-    setCards(updatedCards);
-  };
-
   useEffect(() => {
     if (handleNewTask) {
       const taskObj = {
         id: cards[0].tasks.length,
         name: newTaskName,
-        description: '',
+        description: 'This task has no description',
       };
       const updatedCards = [...cards]; // создание копии объекта cards
       updatedCards[0].tasks.push(taskObj); // обновление массива tasks в копии
@@ -76,7 +62,7 @@ const Cards = () => {
             ''
           )}
 
-          {newTask === cardIndex && cardIndex === 1 ? <Ready onTaskMove={handleTaskMove} /> : ''}
+          {newTask === cardIndex && [1, 2, 3].includes(cardIndex) ? <Ready cardIndex={cardIndex} /> : ''}
 
           {newTask === cardIndex && cardIndex === 0 ? (
             <button
@@ -88,7 +74,7 @@ const Cards = () => {
           ) : (
             <button
               className="card-btn"
-              disabled={cardIndex === 1 && cards[0].tasks.length === 0 ? true : false}
+              disabled={[1, 2, 3].includes(cardIndex) && cards[cardIndex - 1].tasks.length === 0 ? true : false}
               onClick={() => {
                 addTask(cardIndex);
               }}>
