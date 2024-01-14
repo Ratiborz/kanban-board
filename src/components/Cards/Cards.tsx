@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 import './Cards.module.scss';
-import Ready from './Ready/Ready';
+import TaskList from './TaskList/TaskList';
 import Backlog from './Backlog/Backlog';
 import { Card, CardsContext, CardsContextType } from '../../context/CardsData';
+import { Link } from 'react-router-dom';
 
 const Cards = () => {
   const [newTask, setNewTask] = useState(10);
@@ -52,7 +53,7 @@ const Cards = () => {
           <div className="card-tasks">
             {card.tasks.map((task, index: number) => (
               <div key={index} className="task">
-                {task.name}
+                <Link to={`/tasks/:${index}`}>{task.name}</Link>
               </div>
             ))}
           </div>
@@ -62,7 +63,7 @@ const Cards = () => {
             ''
           )}
 
-          {newTask === cardIndex && [1, 2, 3].includes(cardIndex) ? <Ready cardIndex={cardIndex} /> : ''}
+          {newTask === cardIndex && [1, 2, 3].includes(cardIndex) ? <TaskList cardIndex={cardIndex} /> : ''}
 
           {newTask === cardIndex && cardIndex === 0 ? (
             <button

@@ -19,7 +19,6 @@ export const CardsContext = createContext<undefined | CardsContextType>(undefine
 
 const CardsDataProvider = ({ children }: { children: ReactNode }) => {
   const initialCards = storageCards.getItem('cards');
-  console.log(initialCards);
   const [cards, setCards] = useState<Card[]>(
     initialCards || [
       {

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import Select from 'react-select';
-import { Card, CardsContext, CardsContextType } from '../../../context/CardsData';
+import { CardsContext, CardsContextType } from '../../../context/CardsData';
 
 type MyOptionType = {
   value: string;
   label: string;
 };
 
-const Ready: React.FC<{ cardIndex: number }> = ({ cardIndex }) => {
+const TaskList: React.FC<{ cardIndex: number }> = ({ cardIndex }) => {
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
   const actualArray = cardIndex === 0 ? 0 : cardIndex - 1;
@@ -49,4 +49,4 @@ const Ready: React.FC<{ cardIndex: number }> = ({ cardIndex }) => {
   );
 };
 
-export default Ready;
+export default TaskList;
