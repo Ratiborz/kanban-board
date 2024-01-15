@@ -10,6 +10,7 @@ const Cards = () => {
   const [newTask, setNewTask] = useState(10);
   const [newTaskName, setNewTaskName] = useState('');
   const [handleNewTask, setHandleNewTask] = useState(false);
+  const [nextTaskId, setNextTaskId] = useState(0);
 
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
@@ -30,7 +31,7 @@ const Cards = () => {
   useEffect(() => {
     if (handleNewTask) {
       const taskObj = {
-        id: cards[0].tasks.length,
+        id: nextTaskId,
         name: newTaskName,
         description: 'This task has no description',
       };
@@ -38,6 +39,7 @@ const Cards = () => {
       updatedCards[0].tasks.push(taskObj); // обновление массива tasks в копии
       setCards(updatedCards); // обновление состояния cards
 
+      setNextTaskId(nextTaskId + 1);
       // Скрыть поле ввода после добавления задачи
       setNewTask(10);
       setNewTaskName('');
@@ -53,7 +55,9 @@ const Cards = () => {
           <div className="card-tasks">
             {card.tasks.map((task, index: number) => (
               <div key={index} className="task">
-                <Link to={`/tasks/:${index}`}>{task.name}</Link>
+                <Link className="task-link" to={`/tasks/${cards[cardIndex].tasks[index].id}`}>
+                  {task.name}
+                </Link>
               </div>
             ))}
           </div>

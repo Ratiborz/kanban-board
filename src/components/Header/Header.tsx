@@ -4,6 +4,10 @@ import './Header.module.scss';
 type Props = {};
 
 const Header = (props: Props): JSX.Element => {
+  const handleClick = () => {
+    console.log('work');
+  };
+
   return (
     <header className="header">
       <div className="header-container">
@@ -11,7 +15,9 @@ const Header = (props: Props): JSX.Element => {
 
         <div className="header-account-icons">
           <GlobalSvgSelector id="account-logo" />
-          <GlobalSvgSelector id="arrow-down" />
+          <div onClick={handleClick} className="wrapper-svg">
+            <GlobalSvgSelector id="arrow-down" />
+          </div>
         </div>
       </div>
     </header>

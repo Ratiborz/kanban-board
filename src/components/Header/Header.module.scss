@@ -17,6 +17,9 @@
 .header-account-icons {
   display: flex;
   align-items: center;
+  .wrapper-svg {
+    cursor: pointer;
+  }
 }
 
 .header-h1__name {

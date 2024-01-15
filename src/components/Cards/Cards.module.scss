@@ -26,9 +26,19 @@
   padding: 7px 9px 7px 8px;
   margin-bottom: 15px;
   word-wrap: break-word;
-  cursor: pointer;
   &:last-of-type {
     margin-bottom: 0px;
+  }
+}
+
+.task-link {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    color: #0079bf;
+    transition: 0.3s;
   }
 }
 

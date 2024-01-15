@@ -20,17 +20,14 @@ const TaskList: React.FC<{ cardIndex: number }> = ({ cardIndex }) => {
         const backlogTask = updatedCards[actualArray].tasks.find((task) => task.name === selectedTask);
 
         if (backlogTask) {
-          const taskObj = {
-            id: updatedCards[actualArray].tasks.length,
-            name: selectedTask,
-            description: 'This task has no description',
-          };
+          const existingTask = updatedCards[cardIndex].tasks.find((task) => task.id === backlogTask.id);
 
-          updatedCards[cardIndex].tasks.push(taskObj); // Добавить новую задачу в карточку
-
-          updatedCards[actualArray].tasks = updatedCards[actualArray].tasks.filter(
-            (task) => task.id !== backlogTask.id
-          ); // Удалить задачу из предыдущей карточки
+          if (!existingTask) {
+            updatedCards[cardIndex].tasks.push(backlogTask); // Просто переместить задачу в другую карточку
+            updatedCards[actualArray].tasks = updatedCards[actualArray].tasks.filter(
+              (task) => task.id !== backlogTask.id
+            ); // Удалить задачу из предыдущей карточки
+          }
         }
       });
       setCards(updatedCards); // Обновить состояние карточек
