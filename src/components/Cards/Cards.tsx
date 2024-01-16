@@ -5,12 +5,20 @@ import TaskList from './TaskList/TaskList';
 import Backlog from './Backlog/Backlog';
 import { Card, CardsContext, CardsContextType } from '../../context/CardsData';
 import { Link } from 'react-router-dom';
+import { storageCards } from '../../modules/storage';
 
 const Cards = () => {
   const [newTask, setNewTask] = useState(10);
   const [newTaskName, setNewTaskName] = useState('');
   const [handleNewTask, setHandleNewTask] = useState(false);
-  const [nextTaskId, setNextTaskId] = useState(0);
+
+  const initialCards = storageCards.getItem('cards');
+
+  const countTask = initialCards?.reduce((accumulator: number, card: Card) => {
+    return accumulator + card.tasks.length; // высчитывает id для задачи после перезагрузки
+  }, 0);
+
+  const [nextTaskId, setNextTaskId] = useState(0 || countTask);
 
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 

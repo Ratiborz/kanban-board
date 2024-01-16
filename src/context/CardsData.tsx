@@ -42,6 +42,7 @@ const CardsDataProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     storageCards.setItem(cards); // сохраняет cards при каждом его изменении
+    console.log(cards);
   }, [cards]);
 
   return <CardsContext.Provider value={{ cards, setCards }}>{children}</CardsContext.Provider>;

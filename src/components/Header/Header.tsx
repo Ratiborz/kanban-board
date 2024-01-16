@@ -1,12 +1,32 @@
+import { useEffect, useState } from 'react';
 import { GlobalSvgSelector } from '../../assets/images/GlobalSvgSelector';
 import './Header.module.scss';
+import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 
 type Props = {};
 
 const Header = (props: Props): JSX.Element => {
-  const handleClick = () => {
-    console.log('work');
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (modal) {
+        const modalElement = document.querySelector('.modal');
+        if (modalElement && !modalElement.contains(event.target as Node)) {
+          toggleModal();
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [modal]);
 
   return (
     <header className="header">
@@ -15,10 +35,20 @@ const Header = (props: Props): JSX.Element => {
 
         <div className="header-account-icons">
           <GlobalSvgSelector id="account-logo" />
-          <div onClick={handleClick} className="wrapper-svg">
+          <div onClick={toggleModal} className="wrapper-svg">
             <GlobalSvgSelector id="arrow-down" />
           </div>
         </div>
+        {modal && (
+          <div className="modal">
+            <span className="rhomb-wrapper">
+              <CardSvgSelector id="rhomb" />
+            </span>
+
+            <p>Profile</p>
+            <p>Log Out</p>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -12,6 +12,7 @@
   margin: 0 auto;
   padding-top: 7px;
   padding-bottom: 7px;
+  position: relative;
 }
 
 .header-account-icons {
@@ -28,4 +29,31 @@
   font-size: 28px;
   font-weight: 400;
   margin: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  max-width: 134px;
+  width: 100%;
+  border-radius: 5px;
+  background: #fff;
+  padding: 8px 0 7px 7px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  p {
+    margin: 0;
+    transition: 0.3s;
+    border-radius: 5px;
+    &:hover {
+      background-color: #e7ebeb;
+      transition: 0.3s;
+    }
+  }
+}
+
+.rhomb-wrapper {
+  position: absolute;
+  top: -8px;
+  left: 82px;
 }
