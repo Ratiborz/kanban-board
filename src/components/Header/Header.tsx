@@ -3,9 +3,7 @@ import { GlobalSvgSelector } from '../../assets/images/GlobalSvgSelector';
 import './Header.module.scss';
 import { CardSvgSelector } from '../../assets/images/CardSvgSelector';
 
-type Props = {};
-
-const Header = (props: Props): JSX.Element => {
+const Header = (): JSX.Element => {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
