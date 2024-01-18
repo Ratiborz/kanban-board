@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import './Footer.module.scss';
 import { CardsContext, CardsContextType } from '../../context/CardsData';
-type Props = {};
 
-const Footer = (props: Props) => {
+const Footer = () => {
   const { cards } = useContext(CardsContext) as CardsContextType;
 
   return (

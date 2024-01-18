@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import { storageCards } from '../../modules/storage';
 
 const Cards = () => {
-  const [newTask, setNewTask] = useState(10);
-  const [newTaskName, setNewTaskName] = useState('');
-  const [handleNewTask, setHandleNewTask] = useState(false);
+  const [newTask, setNewTask] = useState<number>(10);
+  const [newTaskName, setNewTaskName] = useState<string>('');
+  const [handleNewTask, setHandleNewTask] = useState<boolean>(false);
 
   const initialCards = storageCards.getItem('cards');
 
@@ -18,21 +18,21 @@ const Cards = () => {
     return accumulator + card.tasks.length; // высчитывает id для задачи после перезагрузки
   }, 0);
 
-  const [nextTaskId, setNextTaskId] = useState(0 || countTask);
+  const [nextTaskId, setNextTaskId] = useState<number>(0 || countTask);
 
   const { cards, setCards } = useContext(CardsContext) as CardsContextType;
 
-  const addTask = (index: number) => {
+  const addTask = (index: number): void => {
     setNewTask(index);
   };
 
-  const handleEnterKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleEnterKeyPress = (event: React.KeyboardEvent<HTMLInputElement>): void => {
     if (event.key === 'Enter') {
       setHandleNewTask(true);
     }
   };
 
-  const handleNewTaskInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNewTaskInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNewTaskName(e.target.value);
   };
 
